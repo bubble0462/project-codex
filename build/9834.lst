@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s 			page 1
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -27,642 +27,844 @@ ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s 			page 1
   24              		.thumb_func
   26              	AD9834_Write_16Bits:
   27              	.LVL0:
-  28              	.LFB239:
+  28              	.LFB240:
   29              		.file 1 "User_BSP/9834.c"
-   1:User_BSP/9834.c **** #include "9834.h" 
-   2:User_BSP/9834.c **** #include "main.h"
-   3:User_BSP/9834.c **** extern SPI_HandleTypeDef hspi1;
-   4:User_BSP/9834.c **** /**************************************************************** 
+   1:User_BSP/9834.c **** #include "9834.h"
+   2:User_BSP/9834.c **** 
+   3:User_BSP/9834.c **** static uint16_t ad9834_control_word = AD9834_CTRL_B28;
+   4:User_BSP/9834.c **** static uint32_t ad9834_mclk_hz = AD9834_DEFAULT_MCLK_HZ;
    5:User_BSP/9834.c **** 
-   6:User_BSP/9834.c **** ��������: AD9834_Write_16Bits 
-   7:User_BSP/9834.c **** 
-   8:User_BSP/9834.c **** ��    ��: ��AD9834д��16Ϊ���� 
-   9:User_BSP/9834.c **** 
-  10:User_BSP/9834.c **** ��    ��: data --  Ҫд���16λ���� 
-  11:User_BSP/9834.c **** 
-  12:User_BSP/9834.c **** ����ֵ  : �� 
-  13:User_BSP/9834.c **** 
-  14:User_BSP/9834.c **** *****************************************************************/ 
-  15:User_BSP/9834.c **** 
-  16:User_BSP/9834.c **** void AD9834_Write_16Bits(unsigned int data) 
-  17:User_BSP/9834.c **** { 
-  30              		.loc 1 17 1 view -0
+   6:User_BSP/9834.c **** static void AD9834_Write_ControlRegister(void)
+   7:User_BSP/9834.c **** {
+   8:User_BSP/9834.c ****     AD9834_Write_16Bits(ad9834_control_word);
+   9:User_BSP/9834.c **** }
+  10:User_BSP/9834.c **** 
+  11:User_BSP/9834.c **** void AD9834_Write_16Bits(uint16_t data)
+  12:User_BSP/9834.c **** {
+  30              		.loc 1 12 1 view -0
   31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 8
+  32              		@ args = 0, pretend = 0, frame = 0
   33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		.loc 1 17 1 is_stmt 0 view .LVU1
-  35 0000 10B5     		push	{r4, lr}
+  34              		.loc 1 12 1 is_stmt 0 view .LVU1
+  35 0000 70B5     		push	{r4, r5, r6, lr}
   36              	.LCFI0:
-  37              		.cfi_def_cfa_offset 8
-  38              		.cfi_offset 4, -8
-  39              		.cfi_offset 14, -4
-  40 0002 82B0     		sub	sp, sp, #8
-  41              	.LCFI1:
-ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s 			page 2
+  37              		.cfi_def_cfa_offset 16
+  38              		.cfi_offset 4, -16
+  39              		.cfi_offset 5, -12
+  40              		.cfi_offset 6, -8
+  41              		.cfi_offset 14, -4
+  42 0002 0446     		mov	r4, r0
+  13:User_BSP/9834.c ****     uint16_t tx_word = data;
+  43              		.loc 1 13 5 is_stmt 1 view .LVU2
+  44              	.LVL1:
+  14:User_BSP/9834.c ****     uint8_t bit_index;
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 2
 
 
-  42              		.cfi_def_cfa_offset 16
-  43 0004 0190     		str	r0, [sp, #4]
-  18:User_BSP/9834.c ****     
-  19:User_BSP/9834.c ****     CS_0() ; 
-  44              		.loc 1 19 5 is_stmt 1 view .LVU2
-  45 0006 0A4C     		ldr	r4, .L3
-  46 0008 0022     		movs	r2, #0
-  47 000a 1021     		movs	r1, #16
-  48 000c 2046     		mov	r0, r4
-  49              	.LVL1:
-  50              		.loc 1 19 5 is_stmt 0 view .LVU3
-  51 000e FFF7FEFF 		bl	HAL_GPIO_WritePin
-  52              	.LVL2:
-  20:User_BSP/9834.c **** 
-  21:User_BSP/9834.c **** 		HAL_SPI_Transmit(&hspi1,(uint8_t *)&data, 1 ,HAL_MAX_DELAY);
-  53              		.loc 1 21 3 is_stmt 1 view .LVU4
-  54 0012 4FF0FF33 		mov	r3, #-1
-  55 0016 0122     		movs	r2, #1
-  56 0018 01A9     		add	r1, sp, #4
-  57 001a 0648     		ldr	r0, .L3+4
-  58 001c FFF7FEFF 		bl	HAL_SPI_Transmit
-  59              	.LVL3:
-  22:User_BSP/9834.c **** 	
-  23:User_BSP/9834.c ****     CS_1() ; 
-  60              		.loc 1 23 5 view .LVU5
-  61 0020 0122     		movs	r2, #1
-  62 0022 1021     		movs	r1, #16
-  63 0024 2046     		mov	r0, r4
-  64 0026 FFF7FEFF 		bl	HAL_GPIO_WritePin
-  65              	.LVL4:
-  24:User_BSP/9834.c **** } 
-  66              		.loc 1 24 1 is_stmt 0 view .LVU6
-  67 002a 02B0     		add	sp, sp, #8
-  68              	.LCFI2:
-  69              		.cfi_def_cfa_offset 8
-  70              		@ sp needed
-  71 002c 10BD     		pop	{r4, pc}
-  72              	.L4:
-  73 002e 00BF     		.align	2
-  74              	.L3:
-  75 0030 00000240 		.word	1073872896
-  76 0034 00000000 		.word	hspi1
-  77              		.cfi_endproc
-  78              	.LFE239:
-  80              		.section	.text.AD9834_Select_Wave,"ax",%progbits
-  81              		.align	1
-  82              		.global	AD9834_Select_Wave
-  83              		.syntax unified
-  84              		.thumb
-  85              		.thumb_func
-  87              	AD9834_Select_Wave:
-  88              	.LVL5:
-  89              	.LFB240:
+  45              		.loc 1 14 5 view .LVU3
+  15:User_BSP/9834.c **** 
+  16:User_BSP/9834.c ****     AD9834_SCLK_SET();
+  46              		.loc 1 16 5 view .LVU4
+  47 0004 1C4D     		ldr	r5, .L9
+  48 0006 0122     		movs	r2, #1
+  49 0008 2021     		movs	r1, #32
+  50 000a 2846     		mov	r0, r5
+  51              	.LVL2:
+  52              		.loc 1 16 5 is_stmt 0 view .LVU5
+  53 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
+  54              	.LVL3:
+  17:User_BSP/9834.c ****     CS_0();
+  55              		.loc 1 17 5 is_stmt 1 view .LVU6
+  56 0010 0022     		movs	r2, #0
+  57 0012 1021     		movs	r1, #16
+  58 0014 2846     		mov	r0, r5
+  59 0016 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  60              	.LVL4:
+  18:User_BSP/9834.c **** 
+  19:User_BSP/9834.c ****     for (bit_index = 0U; bit_index < 16U; bit_index++) {
+  61              		.loc 1 19 5 view .LVU7
+  62              		.loc 1 19 20 is_stmt 0 view .LVU8
+  63 001a 0025     		movs	r5, #0
+  64              		.loc 1 19 5 view .LVU9
+  65 001c 14E0     		b	.L2
+  66              	.LVL5:
+  67              	.L8:
+  20:User_BSP/9834.c ****         if ((tx_word & 0x8000U) != 0U) {
+  21:User_BSP/9834.c ****             AD9834_SDATA_SET();
+  68              		.loc 1 21 13 is_stmt 1 view .LVU10
+  69 001e 0122     		movs	r2, #1
+  70 0020 8021     		movs	r1, #128
+  71 0022 1548     		ldr	r0, .L9
+  72 0024 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  73              	.LVL6:
+  74              	.L4:
+  22:User_BSP/9834.c ****         } else {
+  23:User_BSP/9834.c ****             AD9834_SDATA_CLR();
+  24:User_BSP/9834.c ****         }
   25:User_BSP/9834.c **** 
-  26:User_BSP/9834.c **** /*********************************************************************************** 
-  27:User_BSP/9834.c **** 
-  28:User_BSP/9834.c **** �������ƣ�AD9834_Select_Wave 
-ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s 			page 3
+  26:User_BSP/9834.c ****         AD9834_SCLK_CLR();
+  75              		.loc 1 26 9 discriminator 2 view .LVU11
+  76 0028 134E     		ldr	r6, .L9
+  77 002a 0022     		movs	r2, #0
+  78 002c 2021     		movs	r1, #32
+  79 002e 3046     		mov	r0, r6
+  80 0030 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  81              	.LVL7:
+  27:User_BSP/9834.c ****         __NOP();
+  82              		.loc 1 27 9 discriminator 2 view .LVU12
+  83              		.syntax unified
+  84              	@ 27 "User_BSP/9834.c" 1
+  85 0034 00BF     		nop
+  86              	@ 0 "" 2
+  28:User_BSP/9834.c ****         AD9834_SCLK_SET();
+  87              		.loc 1 28 9 discriminator 2 view .LVU13
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 3
 
 
+  88              		.thumb
+  89              		.syntax unified
+  90 0036 0122     		movs	r2, #1
+  91 0038 2021     		movs	r1, #32
+  92 003a 3046     		mov	r0, r6
+  93 003c FFF7FEFF 		bl	HAL_GPIO_WritePin
+  94              	.LVL8:
   29:User_BSP/9834.c **** 
-  30:User_BSP/9834.c **** ��    �ܣ�����Ϊ���ƣ� 
-  31:User_BSP/9834.c **** 
-  32:User_BSP/9834.c ****     -------------------------------------------------- 
-  33:User_BSP/9834.c **** 
-  34:User_BSP/9834.c ****     IOUT���Ҳ� ��SIGNBITOUT���� ��дFREQREG0 ��дPHASE0 
-  35:User_BSP/9834.c **** 
-  36:User_BSP/9834.c ****     ad9834_write_16bit(0x2028)   һ����дFREQREG0 
-  37:User_BSP/9834.c **** 
-  38:User_BSP/9834.c ****     ad9834_write_16bit(0x0038)   ������дFREQREG0��LSB 
-  39:User_BSP/9834.c **** 
-  40:User_BSP/9834.c ****     ad9834_write_16bit(0x1038)   ������дFREQREG0��MSB 
-  41:User_BSP/9834.c **** 
-  42:User_BSP/9834.c ****     -------------------------------------------------- 
+  30:User_BSP/9834.c ****         tx_word <<= 1;
+  95              		.loc 1 30 9 discriminator 2 view .LVU14
+  96              		.loc 1 30 17 is_stmt 0 discriminator 2 view .LVU15
+  97 0040 6400     		lsls	r4, r4, #1
+  98              	.LVL9:
+  99              		.loc 1 30 17 discriminator 2 view .LVU16
+ 100 0042 A4B2     		uxth	r4, r4
+ 101              	.LVL10:
+  19:User_BSP/9834.c ****         if ((tx_word & 0x8000U) != 0U) {
+ 102              		.loc 1 19 43 is_stmt 1 discriminator 2 view .LVU17
+  19:User_BSP/9834.c ****         if ((tx_word & 0x8000U) != 0U) {
+ 103              		.loc 1 19 52 is_stmt 0 discriminator 2 view .LVU18
+ 104 0044 0135     		adds	r5, r5, #1
+ 105              	.LVL11:
+  19:User_BSP/9834.c ****         if ((tx_word & 0x8000U) != 0U) {
+ 106              		.loc 1 19 52 discriminator 2 view .LVU19
+ 107 0046 EDB2     		uxtb	r5, r5
+ 108              	.LVL12:
+ 109              	.L2:
+  19:User_BSP/9834.c ****         if ((tx_word & 0x8000U) != 0U) {
+ 110              		.loc 1 19 26 is_stmt 1 discriminator 1 view .LVU20
+  19:User_BSP/9834.c ****         if ((tx_word & 0x8000U) != 0U) {
+ 111              		.loc 1 19 5 is_stmt 0 discriminator 1 view .LVU21
+ 112 0048 0F2D     		cmp	r5, #15
+ 113 004a 08D8     		bhi	.L7
+  20:User_BSP/9834.c ****             AD9834_SDATA_SET();
+ 114              		.loc 1 20 9 is_stmt 1 view .LVU22
+  20:User_BSP/9834.c ****             AD9834_SDATA_SET();
+ 115              		.loc 1 20 12 is_stmt 0 view .LVU23
+ 116 004c 14F4004F 		tst	r4, #32768
+ 117 0050 E5D1     		bne	.L8
+  23:User_BSP/9834.c ****         }
+ 118              		.loc 1 23 13 is_stmt 1 view .LVU24
+ 119 0052 0022     		movs	r2, #0
+ 120 0054 8021     		movs	r1, #128
+ 121 0056 0848     		ldr	r0, .L9
+ 122 0058 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 123              	.LVL13:
+ 124 005c E4E7     		b	.L4
+ 125              	.L7:
+  31:User_BSP/9834.c ****     }
+  32:User_BSP/9834.c **** 
+  33:User_BSP/9834.c ****     CS_1();
+ 126              		.loc 1 33 5 view .LVU25
+ 127 005e 064C     		ldr	r4, .L9
+ 128              	.LVL14:
+ 129              		.loc 1 33 5 is_stmt 0 view .LVU26
+ 130 0060 0122     		movs	r2, #1
+ 131 0062 1021     		movs	r1, #16
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 4
+
+
+ 132 0064 2046     		mov	r0, r4
+ 133 0066 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 134              	.LVL15:
+  34:User_BSP/9834.c ****     AD9834_SDATA_CLR();
+ 135              		.loc 1 34 5 is_stmt 1 view .LVU27
+ 136 006a 0022     		movs	r2, #0
+ 137 006c 8021     		movs	r1, #128
+ 138 006e 2046     		mov	r0, r4
+ 139 0070 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 140              	.LVL16:
+  35:User_BSP/9834.c **** }
+ 141              		.loc 1 35 1 is_stmt 0 view .LVU28
+ 142 0074 70BD     		pop	{r4, r5, r6, pc}
+ 143              	.LVL17:
+ 144              	.L10:
+ 145              		.loc 1 35 1 view .LVU29
+ 146 0076 00BF     		.align	2
+ 147              	.L9:
+ 148 0078 00000240 		.word	1073872896
+ 149              		.cfi_endproc
+ 150              	.LFE240:
+ 152              		.section	.text.AD9834_Write_ControlRegister,"ax",%progbits
+ 153              		.align	1
+ 154              		.syntax unified
+ 155              		.thumb
+ 156              		.thumb_func
+ 158              	AD9834_Write_ControlRegister:
+ 159              	.LFB239:
+   7:User_BSP/9834.c ****     AD9834_Write_16Bits(ad9834_control_word);
+ 160              		.loc 1 7 1 is_stmt 1 view -0
+ 161              		.cfi_startproc
+ 162              		@ args = 0, pretend = 0, frame = 0
+ 163              		@ frame_needed = 0, uses_anonymous_args = 0
+ 164 0000 08B5     		push	{r3, lr}
+ 165              	.LCFI1:
+ 166              		.cfi_def_cfa_offset 8
+ 167              		.cfi_offset 3, -8
+ 168              		.cfi_offset 14, -4
+   8:User_BSP/9834.c **** }
+ 169              		.loc 1 8 5 view .LVU31
+ 170 0002 024B     		ldr	r3, .L13
+ 171 0004 1888     		ldrh	r0, [r3]
+ 172 0006 FFF7FEFF 		bl	AD9834_Write_16Bits
+ 173              	.LVL18:
+   9:User_BSP/9834.c **** 
+ 174              		.loc 1 9 1 is_stmt 0 view .LVU32
+ 175 000a 08BD     		pop	{r3, pc}
+ 176              	.L14:
+ 177              		.align	2
+ 178              	.L13:
+ 179 000c 00000000 		.word	.LANCHOR0
+ 180              		.cfi_endproc
+ 181              	.LFE239:
+ 183              		.section	.text.AD9834_Set_MclkHz,"ax",%progbits
+ 184              		.align	1
+ 185              		.global	AD9834_Set_MclkHz
+ 186              		.syntax unified
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 5
+
+
+ 187              		.thumb
+ 188              		.thumb_func
+ 190              	AD9834_Set_MclkHz:
+ 191              	.LVL19:
+ 192              	.LFB241:
+  36:User_BSP/9834.c **** 
+  37:User_BSP/9834.c **** void AD9834_Set_MclkHz(uint32_t mclk_hz)
+  38:User_BSP/9834.c **** {
+ 193              		.loc 1 38 1 is_stmt 1 view -0
+ 194              		.cfi_startproc
+ 195              		@ args = 0, pretend = 0, frame = 0
+ 196              		@ frame_needed = 0, uses_anonymous_args = 0
+ 197              		@ link register save eliminated.
+  39:User_BSP/9834.c ****     if (mclk_hz != 0U) {
+ 198              		.loc 1 39 5 view .LVU34
+ 199              		.loc 1 39 8 is_stmt 0 view .LVU35
+ 200 0000 08B1     		cbz	r0, .L15
+  40:User_BSP/9834.c ****         ad9834_mclk_hz = mclk_hz;
+ 201              		.loc 1 40 9 is_stmt 1 view .LVU36
+ 202              		.loc 1 40 24 is_stmt 0 view .LVU37
+ 203 0002 014A     		ldr	r2, .L17
+ 204 0004 1060     		str	r0, [r2]
+ 205              	.L15:
+  41:User_BSP/9834.c ****     }
+  42:User_BSP/9834.c **** }
+ 206              		.loc 1 42 1 view .LVU38
+ 207 0006 7047     		bx	lr
+ 208              	.L18:
+ 209              		.align	2
+ 210              	.L17:
+ 211 0008 00000000 		.word	.LANCHOR1
+ 212              		.cfi_endproc
+ 213              	.LFE241:
+ 215              		.section	.text.AD9834_Get_MclkHz,"ax",%progbits
+ 216              		.align	1
+ 217              		.global	AD9834_Get_MclkHz
+ 218              		.syntax unified
+ 219              		.thumb
+ 220              		.thumb_func
+ 222              	AD9834_Get_MclkHz:
+ 223              	.LFB242:
   43:User_BSP/9834.c **** 
-  44:User_BSP/9834.c ****     IOUT���ǲ� ��дPHASE0 
-  45:User_BSP/9834.c **** 
-  46:User_BSP/9834.c ****     ad9834_write_16bit(0x2002)   һ����дFREQREG0 
-  47:User_BSP/9834.c **** 
-  48:User_BSP/9834.c ****     ad9834_write_16bit(0x0002)   ������дFREQREG0��LSB 
-  49:User_BSP/9834.c **** 
-  50:User_BSP/9834.c ****     ad9834_write_16bit(0x1008)   ������дFREQREG0��MSB 
-  51:User_BSP/9834.c **** 
-  52:User_BSP/9834.c **** ��    ����initdata -- Ҫ��������� 
-  53:User_BSP/9834.c **** 
-  54:User_BSP/9834.c **** ����ֵ  ���� 
-  55:User_BSP/9834.c **** 
-  56:User_BSP/9834.c **** ************************************************************************************/ 
-  57:User_BSP/9834.c **** void AD9834_Select_Wave(unsigned int initdata) 
+  44:User_BSP/9834.c **** uint32_t AD9834_Get_MclkHz(void)
+  45:User_BSP/9834.c **** {
+ 224              		.loc 1 45 1 is_stmt 1 view -0
+ 225              		.cfi_startproc
+ 226              		@ args = 0, pretend = 0, frame = 0
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228              		@ link register save eliminated.
+  46:User_BSP/9834.c ****     return ad9834_mclk_hz;
+ 229              		.loc 1 46 5 view .LVU40
+  47:User_BSP/9834.c **** }
+ 230              		.loc 1 47 1 is_stmt 0 view .LVU41
+ 231 0000 014B     		ldr	r3, .L20
+ 232 0002 1868     		ldr	r0, [r3]
+ 233 0004 7047     		bx	lr
+ 234              	.L21:
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 6
+
+
+ 235 0006 00BF     		.align	2
+ 236              	.L20:
+ 237 0008 00000000 		.word	.LANCHOR1
+ 238              		.cfi_endproc
+ 239              	.LFE242:
+ 241              		.section	.text.AD9834_Select_Wave,"ax",%progbits
+ 242              		.align	1
+ 243              		.global	AD9834_Select_Wave
+ 244              		.syntax unified
+ 245              		.thumb
+ 246              		.thumb_func
+ 248              	AD9834_Select_Wave:
+ 249              	.LVL20:
+ 250              	.LFB244:
+  48:User_BSP/9834.c **** 
+  49:User_BSP/9834.c **** void AD9834_Init(void)
+  50:User_BSP/9834.c **** {
+  51:User_BSP/9834.c ****     CS_1();
+  52:User_BSP/9834.c ****     AD9834_SCLK_SET();
+  53:User_BSP/9834.c ****     AD9834_SDATA_CLR();
+  54:User_BSP/9834.c **** 
+  55:User_BSP/9834.c ****     AD9834_FS_CLR();
+  56:User_BSP/9834.c ****     AD9834_PS_CLR();
+  57:User_BSP/9834.c ****     RESET_0();
   58:User_BSP/9834.c **** 
-  59:User_BSP/9834.c **** { 
-  90              		.loc 1 59 1 is_stmt 1 view -0
-  91              		.cfi_startproc
-  92              		@ args = 0, pretend = 0, frame = 0
-  93              		@ frame_needed = 0, uses_anonymous_args = 0
-  94              		.loc 1 59 1 is_stmt 0 view .LVU8
-  95 0000 38B5     		push	{r3, r4, r5, lr}
-  96              	.LCFI3:
-  97              		.cfi_def_cfa_offset 16
-  98              		.cfi_offset 3, -16
-  99              		.cfi_offset 4, -12
- 100              		.cfi_offset 5, -8
- 101              		.cfi_offset 14, -4
- 102 0002 0546     		mov	r5, r0
-  60:User_BSP/9834.c **** 
-  61:User_BSP/9834.c ****     CS_1(); 
- 103              		.loc 1 61 5 is_stmt 1 view .LVU9
- 104 0004 0C4C     		ldr	r4, .L7
- 105 0006 0122     		movs	r2, #1
- 106 0008 1021     		movs	r1, #16
- 107 000a 2046     		mov	r0, r4
- 108              	.LVL6:
- 109              		.loc 1 61 5 is_stmt 0 view .LVU10
- 110 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
- 111              	.LVL7:
-  62:User_BSP/9834.c **** 
-  63:User_BSP/9834.c ****     RESET_1(); 
-ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s 			page 4
-
-
- 112              		.loc 1 63 5 is_stmt 1 view .LVU11
- 113 0010 0122     		movs	r2, #1
- 114 0012 4021     		movs	r1, #64
- 115 0014 2046     		mov	r0, r4
- 116 0016 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 117              	.LVL8:
-  64:User_BSP/9834.c **** 
-  65:User_BSP/9834.c ****     RESET_1(); 
- 118              		.loc 1 65 5 view .LVU12
- 119 001a 0122     		movs	r2, #1
- 120 001c 4021     		movs	r1, #64
- 121 001e 2046     		mov	r0, r4
- 122 0020 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 123              	.LVL9:
+  59:User_BSP/9834.c ****     ad9834_control_word = AD9834_CTRL_B28 | AD9834_CTRL_RESET;
+  60:User_BSP/9834.c ****     AD9834_Write_ControlRegister();
+  61:User_BSP/9834.c **** 
+  62:User_BSP/9834.c ****     AD9834_Set_Freq(FREQ_0, 0U);
+  63:User_BSP/9834.c ****     AD9834_Set_Freq(FREQ_1, 0U);
+  64:User_BSP/9834.c ****     AD9834_Set_Phase(PHASE_0, 0.0f);
+  65:User_BSP/9834.c ****     AD9834_Set_Phase(PHASE_1, 0.0f);
   66:User_BSP/9834.c **** 
-  67:User_BSP/9834.c ****     RESET_0();
- 124              		.loc 1 67 5 view .LVU13
- 125 0024 0022     		movs	r2, #0
- 126 0026 4021     		movs	r1, #64
- 127 0028 2046     		mov	r0, r4
- 128 002a FFF7FEFF 		bl	HAL_GPIO_WritePin
- 129              	.LVL10:
-  68:User_BSP/9834.c **** 
-  69:User_BSP/9834.c ****       
+  67:User_BSP/9834.c ****     ad9834_control_word = AD9834_CTRL_B28;
+  68:User_BSP/9834.c ****     AD9834_Write_ControlRegister();
+  69:User_BSP/9834.c **** }
   70:User_BSP/9834.c **** 
-  71:User_BSP/9834.c ****     AD9834_Write_16Bits(initdata); 
- 130              		.loc 1 71 5 view .LVU14
- 131 002e 2846     		mov	r0, r5
- 132 0030 FFF7FEFF 		bl	AD9834_Write_16Bits
- 133              	.LVL11:
-  72:User_BSP/9834.c **** 
-  73:User_BSP/9834.c **** } 
- 134              		.loc 1 73 1 is_stmt 0 view .LVU15
- 135 0034 38BD     		pop	{r3, r4, r5, pc}
- 136              	.LVL12:
- 137              	.L8:
- 138              		.loc 1 73 1 view .LVU16
- 139 0036 00BF     		.align	2
- 140              	.L7:
- 141 0038 00000240 		.word	1073872896
- 142              		.cfi_endproc
- 143              	.LFE240:
- 145              		.section	.text.AD9834_Init,"ax",%progbits
- 146              		.align	1
- 147              		.global	AD9834_Init
- 148              		.syntax unified
- 149              		.thumb
- 150              		.thumb_func
- 152              	AD9834_Init:
- 153              	.LFB241:
-  74:User_BSP/9834.c **** 
-  75:User_BSP/9834.c **** /**************************************************************** 
-  76:User_BSP/9834.c **** 
-  77:User_BSP/9834.c **** ��������: Init_AD9834 
-  78:User_BSP/9834.c **** 
-  79:User_BSP/9834.c **** ��    ��: ��ʼ��AD9834�������� ��    ��: �� 
+  71:User_BSP/9834.c **** void AD9834_Select_Wave(uint16_t waveform)
+  72:User_BSP/9834.c **** {
+ 251              		.loc 1 72 1 is_stmt 1 view -0
+ 252              		.cfi_startproc
+ 253              		@ args = 0, pretend = 0, frame = 0
+ 254              		@ frame_needed = 0, uses_anonymous_args = 0
+ 255              		.loc 1 72 1 is_stmt 0 view .LVU43
+ 256 0000 08B5     		push	{r3, lr}
+ 257              	.LCFI2:
+ 258              		.cfi_def_cfa_offset 8
+ 259              		.cfi_offset 3, -8
+ 260              		.cfi_offset 14, -4
+  73:User_BSP/9834.c ****     const uint16_t waveform_mask = AD9834_CTRL_OPBITEN |
+ 261              		.loc 1 73 5 is_stmt 1 view .LVU44
+ 262              	.LVL21:
+  74:User_BSP/9834.c ****                                    AD9834_CTRL_SIGN_PIB |
+  75:User_BSP/9834.c ****                                    AD9834_CTRL_DIV2 |
+  76:User_BSP/9834.c ****                                    AD9834_CTRL_MODE;
+  77:User_BSP/9834.c **** 
+  78:User_BSP/9834.c ****     ad9834_control_word &= (uint16_t)~(AD9834_CTRL_RESET | waveform_mask);
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 7
+
+
+ 263              		.loc 1 78 5 view .LVU45
+ 264              		.loc 1 78 25 is_stmt 0 view .LVU46
+ 265 0002 074A     		ldr	r2, .L24
+ 266 0004 1388     		ldrh	r3, [r2]
+ 267 0006 23F49D73 		bic	r3, r3, #314
+ 268 000a 9BB2     		uxth	r3, r3
+ 269 000c 1380     		strh	r3, [r2]	@ movhi
+  79:User_BSP/9834.c ****     ad9834_control_word |= (uint16_t)(AD9834_CTRL_B28 | (waveform & waveform_mask));
+ 270              		.loc 1 79 5 is_stmt 1 view .LVU47
+ 271              		.loc 1 79 25 is_stmt 0 view .LVU48
+ 272 000e 00F03A00 		and	r0, r0, #58
+ 273              	.LVL22:
+ 274              		.loc 1 79 25 view .LVU49
+ 275 0012 0343     		orrs	r3, r3, r0
+ 276 0014 43F40053 		orr	r3, r3, #8192
+ 277 0018 1380     		strh	r3, [r2]	@ movhi
   80:User_BSP/9834.c **** 
-ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s 			page 5
+  81:User_BSP/9834.c ****     AD9834_Write_ControlRegister();
+ 278              		.loc 1 81 5 is_stmt 1 view .LVU50
+ 279 001a FFF7FEFF 		bl	AD9834_Write_ControlRegister
+ 280              	.LVL23:
+  82:User_BSP/9834.c **** }
+ 281              		.loc 1 82 1 is_stmt 0 view .LVU51
+ 282 001e 08BD     		pop	{r3, pc}
+ 283              	.L25:
+ 284              		.align	2
+ 285              	.L24:
+ 286 0020 00000000 		.word	.LANCHOR0
+ 287              		.cfi_endproc
+ 288              	.LFE244:
+ 290              		.global	__aeabi_uldivmod
+ 291              		.section	.text.AD9834_Set_Freq,"ax",%progbits
+ 292              		.align	1
+ 293              		.global	AD9834_Set_Freq
+ 294              		.syntax unified
+ 295              		.thumb
+ 296              		.thumb_func
+ 298              	AD9834_Set_Freq:
+ 299              	.LVL24:
+ 300              	.LFB245:
+  83:User_BSP/9834.c **** 
+  84:User_BSP/9834.c **** void AD9834_Set_Freq(uint8_t freq_number, uint32_t freq_hz)
+  85:User_BSP/9834.c **** {
+ 301              		.loc 1 85 1 is_stmt 1 view -0
+ 302              		.cfi_startproc
+ 303              		@ args = 0, pretend = 0, frame = 0
+ 304              		@ frame_needed = 0, uses_anonymous_args = 0
+ 305              		.loc 1 85 1 is_stmt 0 view .LVU53
+ 306 0000 38B5     		push	{r3, r4, r5, lr}
+ 307              	.LCFI3:
+ 308              		.cfi_def_cfa_offset 16
+ 309              		.cfi_offset 3, -16
+ 310              		.cfi_offset 4, -12
+ 311              		.cfi_offset 5, -8
+ 312              		.cfi_offset 14, -4
+ 313 0002 0546     		mov	r5, r0
+ 314 0004 0C46     		mov	r4, r1
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 8
 
 
-  81:User_BSP/9834.c **** ����ֵ  : �� 
-  82:User_BSP/9834.c **** 
-  83:User_BSP/9834.c **** *****************************************************************/ 
-  84:User_BSP/9834.c **** // B6 FS  B5 PS    B7 FSY   B8 SCK   B9 SDA B10 RST 
-  85:User_BSP/9834.c **** 
-  86:User_BSP/9834.c **** void AD9834_Init() 
-  87:User_BSP/9834.c **** 
-  88:User_BSP/9834.c **** {
- 154              		.loc 1 88 1 is_stmt 1 view -0
- 155              		.cfi_startproc
- 156              		@ args = 0, pretend = 0, frame = 0
- 157              		@ frame_needed = 0, uses_anonymous_args = 0
- 158 0000 08B5     		push	{r3, lr}
- 159              	.LCFI4:
- 160              		.cfi_def_cfa_offset 8
- 161              		.cfi_offset 3, -8
- 162              		.cfi_offset 14, -4
-  89:User_BSP/9834.c **** 
-  90:User_BSP/9834.c ****    
-  91:User_BSP/9834.c **** 		AD9834_FS_CLR;
- 163              		.loc 1 91 3 view .LVU18
- 164 0002 0022     		movs	r2, #0
- 165 0004 4FF48071 		mov	r1, #256
- 166 0008 0C48     		ldr	r0, .L11
- 167 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
- 168              	.LVL13:
-  92:User_BSP/9834.c **** 		AD9834_PS_CLR;
- 169              		.loc 1 92 3 view .LVU19
- 170 000e 0022     		movs	r2, #0
- 171 0010 0221     		movs	r1, #2
- 172 0012 0B48     		ldr	r0, .L11+4
- 173 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 174              	.LVL14:
-  93:User_BSP/9834.c **** 
-  94:User_BSP/9834.c **** 	AD9834_Write_16Bits(0x2100);
- 175              		.loc 1 94 2 view .LVU20
- 176 0018 4FF40450 		mov	r0, #8448
- 177 001c FFF7FEFF 		bl	AD9834_Write_16Bits
- 178              	.LVL15:
-  95:User_BSP/9834.c **** 	AD9834_Write_16Bits(0x2038);
- 179              		.loc 1 95 2 view .LVU21
- 180 0020 42F23800 		movw	r0, #8248
- 181 0024 FFF7FEFF 		bl	AD9834_Write_16Bits
- 182              	.LVL16:
-  96:User_BSP/9834.c **** 	AD9834_Write_16Bits(0XC000);
- 183              		.loc 1 96 2 view .LVU22
- 184 0028 4FF44040 		mov	r0, #49152
- 185 002c FFF7FEFF 		bl	AD9834_Write_16Bits
- 186              	.LVL17:
-  97:User_BSP/9834.c **** 	AD9834_Write_16Bits(0x2100);
- 187              		.loc 1 97 2 view .LVU23
- 188 0030 4FF40450 		mov	r0, #8448
- 189 0034 FFF7FEFF 		bl	AD9834_Write_16Bits
- 190              	.LVL18:
-  98:User_BSP/9834.c **** } 
- 191              		.loc 1 98 1 is_stmt 0 view .LVU24
- 192 0038 08BD     		pop	{r3, pc}
-ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s 			page 6
-
-
- 193              	.L12:
- 194 003a 00BF     		.align	2
- 195              	.L11:
- 196 003c 00000240 		.word	1073872896
- 197 0040 00080240 		.word	1073874944
- 198              		.cfi_endproc
- 199              	.LFE241:
- 201              		.global	__aeabi_ui2d
- 202              		.global	__aeabi_dmul
- 203              		.global	__aeabi_d2uiz
- 204              		.section	.text.AD9834_Set_Freq,"ax",%progbits
- 205              		.align	1
- 206              		.global	AD9834_Set_Freq
- 207              		.syntax unified
- 208              		.thumb
- 209              		.thumb_func
- 211              	AD9834_Set_Freq:
- 212              	.LVL19:
- 213              	.LFB242:
+  86:User_BSP/9834.c ****     uint32_t freq_reg;
+ 315              		.loc 1 86 5 is_stmt 1 view .LVU54
+  87:User_BSP/9834.c ****     uint16_t reg_addr;
+ 316              		.loc 1 87 5 view .LVU55
+  88:User_BSP/9834.c ****     uint16_t freq_lsb;
+ 317              		.loc 1 88 5 view .LVU56
+  89:User_BSP/9834.c ****     uint16_t freq_msb;
+ 318              		.loc 1 89 5 view .LVU57
+  90:User_BSP/9834.c **** 
+  91:User_BSP/9834.c ****     if ((ad9834_control_word & AD9834_CTRL_B28) == 0U) {
+ 319              		.loc 1 91 5 view .LVU58
+ 320              		.loc 1 91 30 is_stmt 0 view .LVU59
+ 321 0006 194B     		ldr	r3, .L36
+ 322 0008 1B88     		ldrh	r3, [r3]
+ 323              		.loc 1 91 8 view .LVU60
+ 324 000a 13F4005F 		tst	r3, #8192
+ 325 000e 23D0     		beq	.L34
+ 326              	.LVL25:
+ 327              	.L27:
+  92:User_BSP/9834.c ****         ad9834_control_word |= AD9834_CTRL_B28;
+  93:User_BSP/9834.c ****         AD9834_Write_ControlRegister();
+  94:User_BSP/9834.c ****     }
+  95:User_BSP/9834.c **** 
+  96:User_BSP/9834.c ****     if (ad9834_mclk_hz == 0U) {
+ 328              		.loc 1 96 5 is_stmt 1 view .LVU61
+ 329              		.loc 1 96 24 is_stmt 0 view .LVU62
+ 330 0010 174B     		ldr	r3, .L36+4
+ 331 0012 1A68     		ldr	r2, [r3]
+ 332              		.loc 1 96 8 view .LVU63
+ 333 0014 FAB1     		cbz	r2, .L26
+  97:User_BSP/9834.c ****         return;
+  98:User_BSP/9834.c ****     }
   99:User_BSP/9834.c **** 
- 100:User_BSP/9834.c **** /**************************************************************** 
- 101:User_BSP/9834.c **** 
- 102:User_BSP/9834.c **** ��������: AD9834_Set_Freq 
- 103:User_BSP/9834.c **** 
- 104:User_BSP/9834.c **** ��    ��: ����Ƶ��ֵ 
- 105:User_BSP/9834.c **** 
- 106:User_BSP/9834.c **** ��    ��: freq_number -- Ҫд���ƽ�ʼĴ���(FREQ_0��FREQ_1) 
- 107:User_BSP/9834.c **** 
- 108:User_BSP/9834.c ****           freq -- Ƶ��ֵ (Freq_value(value)=Freq_data(data)*FCLK/2^28) 
- 109:User_BSP/9834.c **** 
- 110:User_BSP/9834.c **** ����ֵ  : �� 
- 111:User_BSP/9834.c **** 
- 112:User_BSP/9834.c **** *****************************************************************/ 
- 113:User_BSP/9834.c **** void AD9834_Set_Freq(unsigned char freq_number, unsigned long freq) 
+ 100:User_BSP/9834.c ****     freq_reg = (uint32_t)(((((uint64_t)freq_hz) << 28) + (ad9834_mclk_hz / 2U)) / ad9834_mclk_hz);
+ 334              		.loc 1 100 5 is_stmt 1 view .LVU64
+ 335              		.loc 1 100 49 is_stmt 0 view .LVU65
+ 336 0016 2109     		lsrs	r1, r4, #4
+ 337 0018 2307     		lsls	r3, r4, #28
+ 338              		.loc 1 100 74 view .LVU66
+ 339 001a 5008     		lsrs	r0, r2, #1
+ 340              		.loc 1 100 56 view .LVU67
+ 341 001c 1818     		adds	r0, r3, r0
+ 342              		.loc 1 100 81 view .LVU68
+ 343 001e 4FF00003 		mov	r3, #0
+ 344 0022 41F10001 		adc	r1, r1, #0
+ 345 0026 FFF7FEFF 		bl	__aeabi_uldivmod
+ 346              	.LVL26:
+ 347              		.loc 1 100 14 view .LVU69
+ 348 002a 0346     		mov	r3, r0
+ 349              	.LVL27:
+ 101:User_BSP/9834.c ****     if (freq_reg > 0x0FFFFFFFU) {
+ 350              		.loc 1 101 5 is_stmt 1 view .LVU70
+ 351              		.loc 1 101 8 is_stmt 0 view .LVU71
+ 352 002c B0F1805F 		cmp	r0, #268435456
+ 353 0030 01D3     		bcc	.L29
+ 102:User_BSP/9834.c ****         freq_reg = 0x0FFFFFFFU;
+ 354              		.loc 1 102 18 view .LVU72
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 9
+
+
+ 355 0032 6FF07043 		mvn	r3, #-268435456
+ 356              	.L29:
+ 357              	.LVL28:
+ 103:User_BSP/9834.c ****     }
+ 104:User_BSP/9834.c **** 
+ 105:User_BSP/9834.c ****     reg_addr = (freq_number == FREQ_1) ? 0x8000U : 0x4000U;
+ 358              		.loc 1 105 5 is_stmt 1 view .LVU73
+ 359              		.loc 1 105 14 is_stmt 0 view .LVU74
+ 360 0036 012D     		cmp	r5, #1
+ 361 0038 15D0     		beq	.L35
+ 362 003a 4FF48042 		mov	r2, #16384
+ 363              	.L30:
+ 364              	.LVL29:
+ 106:User_BSP/9834.c ****     freq_lsb = (uint16_t)(reg_addr | (freq_reg & 0x3FFFU));
+ 365              		.loc 1 106 5 is_stmt 1 discriminator 4 view .LVU75
+ 366              		.loc 1 106 48 is_stmt 0 discriminator 4 view .LVU76
+ 367 003e C3F30D00 		ubfx	r0, r3, #0, #14
+ 368              	.LVL30:
+ 107:User_BSP/9834.c ****     freq_msb = (uint16_t)(reg_addr | ((freq_reg >> 14) & 0x3FFFU));
+ 369              		.loc 1 107 5 is_stmt 1 discriminator 4 view .LVU77
+ 370              		.loc 1 107 56 is_stmt 0 discriminator 4 view .LVU78
+ 371 0042 C3F38D33 		ubfx	r3, r3, #14, #14
+ 372              	.LVL31:
+ 373              		.loc 1 107 14 discriminator 4 view .LVU79
+ 374 0046 43EA0204 		orr	r4, r3, r2
+ 375              	.LVL32:
+ 108:User_BSP/9834.c **** 
+ 109:User_BSP/9834.c ****     AD9834_Write_16Bits(freq_lsb);
+ 376              		.loc 1 109 5 is_stmt 1 discriminator 4 view .LVU80
+ 377 004a 1043     		orrs	r0, r0, r2
+ 378              	.LVL33:
+ 379              		.loc 1 109 5 is_stmt 0 discriminator 4 view .LVU81
+ 380 004c FFF7FEFF 		bl	AD9834_Write_16Bits
+ 381              	.LVL34:
+ 110:User_BSP/9834.c ****     AD9834_Write_16Bits(freq_msb);
+ 382              		.loc 1 110 5 is_stmt 1 discriminator 4 view .LVU82
+ 383 0050 2046     		mov	r0, r4
+ 384 0052 FFF7FEFF 		bl	AD9834_Write_16Bits
+ 385              	.LVL35:
+ 386              	.L26:
+ 111:User_BSP/9834.c **** }
+ 387              		.loc 1 111 1 is_stmt 0 view .LVU83
+ 388 0056 38BD     		pop	{r3, r4, r5, pc}
+ 389              	.LVL36:
+ 390              	.L34:
+  92:User_BSP/9834.c ****         AD9834_Write_ControlRegister();
+ 391              		.loc 1 92 9 is_stmt 1 view .LVU84
+  92:User_BSP/9834.c ****         AD9834_Write_ControlRegister();
+ 392              		.loc 1 92 29 is_stmt 0 view .LVU85
+ 393 0058 43F40053 		orr	r3, r3, #8192
+ 394 005c 034A     		ldr	r2, .L36
+ 395 005e 1380     		strh	r3, [r2]	@ movhi
+  93:User_BSP/9834.c ****     }
+ 396              		.loc 1 93 9 is_stmt 1 view .LVU86
+ 397 0060 FFF7FEFF 		bl	AD9834_Write_ControlRegister
+ 398              	.LVL37:
+  93:User_BSP/9834.c ****     }
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 10
+
+
+ 399              		.loc 1 93 9 is_stmt 0 view .LVU87
+ 400 0064 D4E7     		b	.L27
+ 401              	.LVL38:
+ 402              	.L35:
+ 105:User_BSP/9834.c ****     freq_lsb = (uint16_t)(reg_addr | (freq_reg & 0x3FFFU));
+ 403              		.loc 1 105 14 view .LVU88
+ 404 0066 4FF40042 		mov	r2, #32768
+ 405 006a E8E7     		b	.L30
+ 406              	.L37:
+ 407              		.align	2
+ 408              	.L36:
+ 409 006c 00000000 		.word	.LANCHOR0
+ 410 0070 00000000 		.word	.LANCHOR1
+ 411              		.cfi_endproc
+ 412              	.LFE245:
+ 414              		.section	.text.AD9834_Set_Phase,"ax",%progbits
+ 415              		.align	1
+ 416              		.global	AD9834_Set_Phase
+ 417              		.syntax unified
+ 418              		.thumb
+ 419              		.thumb_func
+ 421              	AD9834_Set_Phase:
+ 422              	.LVL39:
+ 423              	.LFB246:
+ 112:User_BSP/9834.c **** 
+ 113:User_BSP/9834.c **** void AD9834_Set_Phase(uint8_t phase_number, float phase_in_degrees)
  114:User_BSP/9834.c **** {
- 214              		.loc 1 114 1 is_stmt 1 view -0
- 215              		.cfi_startproc
- 216              		@ args = 0, pretend = 0, frame = 0
- 217              		@ frame_needed = 0, uses_anonymous_args = 0
- 218              		.loc 1 114 1 is_stmt 0 view .LVU26
- 219 0000 38B5     		push	{r3, r4, r5, lr}
- 220              	.LCFI5:
- 221              		.cfi_def_cfa_offset 16
- 222              		.cfi_offset 3, -16
- 223              		.cfi_offset 4, -12
- 224              		.cfi_offset 5, -8
- 225              		.cfi_offset 14, -4
- 226 0002 0546     		mov	r5, r0
- 115:User_BSP/9834.c ****     unsigned long FREQREG = (unsigned long)(268435456.0/AD9834_SYSTEM_COLCK*freq); 
- 227              		.loc 1 115 5 is_stmt 1 view .LVU27
- 228              		.loc 1 115 76 is_stmt 0 view .LVU28
- 229 0004 0846     		mov	r0, r1
- 230              	.LVL20:
- 231              		.loc 1 115 76 view .LVU29
- 232 0006 FFF7FEFF 		bl	__aeabi_ui2d
- 233              	.LVL21:
- 234              		.loc 1 115 76 view .LVU30
-ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s 			page 7
+ 424              		.loc 1 114 1 is_stmt 1 view -0
+ 425              		.cfi_startproc
+ 426              		@ args = 0, pretend = 0, frame = 0
+ 427              		@ frame_needed = 0, uses_anonymous_args = 0
+ 428              		.loc 1 114 1 is_stmt 0 view .LVU90
+ 429 0000 08B5     		push	{r3, lr}
+ 430              	.LCFI4:
+ 431              		.cfi_def_cfa_offset 8
+ 432              		.cfi_offset 3, -8
+ 433              		.cfi_offset 14, -4
+ 115:User_BSP/9834.c ****     uint16_t phase_word;
+ 434              		.loc 1 115 5 is_stmt 1 view .LVU91
+ 116:User_BSP/9834.c ****     uint16_t phase_value;
+ 435              		.loc 1 116 5 view .LVU92
+ 117:User_BSP/9834.c **** 
+ 118:User_BSP/9834.c ****     while (phase_in_degrees < 0.0f) {
+ 436              		.loc 1 118 5 view .LVU93
+ 437              		.loc 1 118 11 is_stmt 0 view .LVU94
+ 438 0002 03E0     		b	.L39
+ 439              	.L40:
+ 119:User_BSP/9834.c ****         phase_in_degrees += 360.0f;
+ 440              		.loc 1 119 9 is_stmt 1 view .LVU95
+ 441              		.loc 1 119 26 is_stmt 0 view .LVU96
+ 442 0004 DFED187A 		vldr.32	s15, .L47
+ 443 0008 30EE270A 		vadd.f32	s0, s0, s15
+ 444              	.LVL40:
+ 445              	.L39:
+ 118:User_BSP/9834.c ****         phase_in_degrees += 360.0f;
+ 446              		.loc 1 118 11 is_stmt 1 view .LVU97
+ 447 000c B5EEC00A 		vcmpe.f32	s0, #0
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 11
 
 
- 235 000a 11A3     		adr	r3, .L17
- 236 000c D3E90023 		ldrd	r2, [r3]
- 237 0010 FFF7FEFF 		bl	__aeabi_dmul
- 238              	.LVL22:
- 239              		.loc 1 115 19 view .LVU31
- 240 0014 FFF7FEFF 		bl	__aeabi_d2uiz
- 241              	.LVL23:
- 116:User_BSP/9834.c ****     unsigned int FREQREG_LSB_14BIT = (unsigned int)FREQREG; 
- 242              		.loc 1 116 5 is_stmt 1 view .LVU32
- 117:User_BSP/9834.c ****     unsigned int FREQREG_MSB_14BIT = (unsigned int)(FREQREG>>14); 
- 243              		.loc 1 117 5 view .LVU33
- 244              		.loc 1 117 18 is_stmt 0 view .LVU34
- 245 0018 840B     		lsrs	r4, r0, #14
- 246              	.LVL24:
- 118:User_BSP/9834.c **** 	
- 119:User_BSP/9834.c ****     if(freq_number == FREQ_0) 
- 247              		.loc 1 119 5 is_stmt 1 view .LVU35
- 248              		.loc 1 119 7 is_stmt 0 view .LVU36
- 249 001a 6DB9     		cbnz	r5, .L14
- 120:User_BSP/9834.c ****     { 
- 121:User_BSP/9834.c ****         FREQREG_LSB_14BIT &= ~(1U<<15); 
- 250              		.loc 1 121 9 is_stmt 1 view .LVU37
- 251              		.loc 1 121 27 is_stmt 0 view .LVU38
- 252 001c 20F40040 		bic	r0, r0, #32768
- 253              	.LVL25:
- 122:User_BSP/9834.c ****         FREQREG_LSB_14BIT |= 1<<14; 
- 254              		.loc 1 122 9 is_stmt 1 view .LVU39
- 255              		.loc 1 122 27 is_stmt 0 view .LVU40
- 256 0020 40F48040 		orr	r0, r0, #16384
- 257              	.LVL26:
- 123:User_BSP/9834.c ****         FREQREG_MSB_14BIT &= ~(1U<<15); 
- 258              		.loc 1 123 9 is_stmt 1 view .LVU41
- 259              		.loc 1 123 27 is_stmt 0 view .LVU42
- 260 0024 24F40044 		bic	r4, r4, #32768
- 261              	.LVL27:
- 124:User_BSP/9834.c ****         FREQREG_MSB_14BIT |= 1<<14; 
- 262              		.loc 1 124 9 is_stmt 1 view .LVU43
- 263              		.loc 1 124 27 is_stmt 0 view .LVU44
- 264 0028 44F48044 		orr	r4, r4, #16384
- 265              	.LVL28:
- 266              	.L15:
- 125:User_BSP/9834.c ****     }
- 126:User_BSP/9834.c ****     else
- 127:User_BSP/9834.c ****     {
- 128:User_BSP/9834.c ****         FREQREG_LSB_14BIT &= ~(1<<14); 
- 129:User_BSP/9834.c ****         FREQREG_LSB_14BIT |= 1U<<15; 
- 130:User_BSP/9834.c ****         FREQREG_MSB_14BIT &= ~(1<<14); 
- 131:User_BSP/9834.c ****         FREQREG_MSB_14BIT |= 1U<<15; 
- 132:User_BSP/9834.c ****     } 
- 133:User_BSP/9834.c ****     AD9834_Write_16Bits(FREQREG_LSB_14BIT); 
- 267              		.loc 1 133 5 is_stmt 1 view .LVU45
- 268 002c FFF7FEFF 		bl	AD9834_Write_16Bits
- 269              	.LVL29:
- 134:User_BSP/9834.c ****     AD9834_Write_16Bits(FREQREG_MSB_14BIT);      
- 270              		.loc 1 134 5 view .LVU46
- 271 0030 2046     		mov	r0, r4
- 272 0032 FFF7FEFF 		bl	AD9834_Write_16Bits
-ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s 			page 8
+ 448 0010 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 449 0014 F6D4     		bmi	.L40
+ 118:User_BSP/9834.c ****         phase_in_degrees += 360.0f;
+ 450              		.loc 1 118 11 is_stmt 0 view .LVU98
+ 451 0016 03E0     		b	.L41
+ 452              	.L42:
+ 120:User_BSP/9834.c ****     }
+ 121:User_BSP/9834.c **** 
+ 122:User_BSP/9834.c ****     while (phase_in_degrees >= 360.0f) {
+ 123:User_BSP/9834.c ****         phase_in_degrees -= 360.0f;
+ 453              		.loc 1 123 9 is_stmt 1 view .LVU99
+ 454              		.loc 1 123 26 is_stmt 0 view .LVU100
+ 455 0018 DFED137A 		vldr.32	s15, .L47
+ 456 001c 30EE670A 		vsub.f32	s0, s0, s15
+ 457              	.LVL41:
+ 458              	.L41:
+ 122:User_BSP/9834.c ****         phase_in_degrees -= 360.0f;
+ 459              		.loc 1 122 11 is_stmt 1 view .LVU101
+ 460 0020 DFED117A 		vldr.32	s15, .L47
+ 461 0024 B4EEE70A 		vcmpe.f32	s0, s15
+ 462 0028 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 463 002c F4DA     		bge	.L42
+ 124:User_BSP/9834.c ****     }
+ 125:User_BSP/9834.c **** 
+ 126:User_BSP/9834.c ****     phase_value = (uint16_t)(((phase_in_degrees * 4096.0f) / 360.0f) + 0.5f) & 0x0FFFU;
+ 464              		.loc 1 126 5 view .LVU102
+ 465              		.loc 1 126 49 is_stmt 0 view .LVU103
+ 466 002e DFED0F7A 		vldr.32	s15, .L47+4
+ 467 0032 20EE270A 		vmul.f32	s0, s0, s15
+ 468              	.LVL42:
+ 469              		.loc 1 126 60 view .LVU104
+ 470 0036 9FED0C7A 		vldr.32	s14, .L47
+ 471 003a C0EE077A 		vdiv.f32	s15, s0, s14
+ 472              		.loc 1 126 70 view .LVU105
+ 473 003e B6EE007A 		vmov.f32	s14, #5.0e-1
+ 474 0042 77EE877A 		vadd.f32	s15, s15, s14
+ 475              		.loc 1 126 19 view .LVU106
+ 476 0046 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 477              		.loc 1 126 17 view .LVU107
+ 478 004a 17EE903A 		vmov	r3, s15	@ int
+ 479 004e C3F30B03 		ubfx	r3, r3, #0, #12
+ 480              	.LVL43:
+ 127:User_BSP/9834.c ****     phase_word = (phase_number == PHASE_1) ? (uint16_t)(0xE000U | phase_value)
+ 481              		.loc 1 127 5 is_stmt 1 view .LVU108
+ 482              		.loc 1 127 16 is_stmt 0 view .LVU109
+ 483 0052 0128     		cmp	r0, #1
+ 484 0054 04D0     		beq	.L46
+ 485              		.loc 1 127 16 discriminator 2 view .LVU110
+ 486 0056 43F44040 		orr	r0, r3, #49152
+ 487              	.LVL44:
+ 488              	.L44:
+ 128:User_BSP/9834.c ****                                            : (uint16_t)(0xC000U | phase_value);
+ 129:User_BSP/9834.c **** 
+ 130:User_BSP/9834.c ****     AD9834_Write_16Bits(phase_word);
+ 489              		.loc 1 130 5 is_stmt 1 discriminator 4 view .LVU111
+ 490 005a FFF7FEFF 		bl	AD9834_Write_16Bits
+ 491              	.LVL45:
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 12
 
 
- 273              	.LVL30:
- 135:User_BSP/9834.c **** } 
- 274              		.loc 1 135 1 is_stmt 0 view .LVU47
- 275 0036 38BD     		pop	{r3, r4, r5, pc}
- 276              	.LVL31:
- 277              	.L14:
- 128:User_BSP/9834.c ****         FREQREG_LSB_14BIT |= 1U<<15; 
- 278              		.loc 1 128 9 is_stmt 1 view .LVU48
- 128:User_BSP/9834.c ****         FREQREG_LSB_14BIT |= 1U<<15; 
- 279              		.loc 1 128 27 is_stmt 0 view .LVU49
- 280 0038 20F48040 		bic	r0, r0, #16384
- 281              	.LVL32:
- 129:User_BSP/9834.c ****         FREQREG_MSB_14BIT &= ~(1<<14); 
- 282              		.loc 1 129 9 is_stmt 1 view .LVU50
- 129:User_BSP/9834.c ****         FREQREG_MSB_14BIT &= ~(1<<14); 
- 283              		.loc 1 129 27 is_stmt 0 view .LVU51
- 284 003c 40F40040 		orr	r0, r0, #32768
- 285              	.LVL33:
- 130:User_BSP/9834.c ****         FREQREG_MSB_14BIT |= 1U<<15; 
- 286              		.loc 1 130 9 is_stmt 1 view .LVU52
- 130:User_BSP/9834.c ****         FREQREG_MSB_14BIT |= 1U<<15; 
- 287              		.loc 1 130 27 is_stmt 0 view .LVU53
- 288 0040 24F48044 		bic	r4, r4, #16384
- 289              	.LVL34:
- 131:User_BSP/9834.c ****     } 
- 290              		.loc 1 131 9 is_stmt 1 view .LVU54
- 131:User_BSP/9834.c ****     } 
- 291              		.loc 1 131 27 is_stmt 0 view .LVU55
- 292 0044 44F40044 		orr	r4, r4, #32768
- 293              	.LVL35:
- 131:User_BSP/9834.c ****     } 
- 294              		.loc 1 131 27 view .LVU56
- 295 0048 F0E7     		b	.L15
- 296              	.L18:
- 297 004a 00BFAFF3 		.align	3
- 297      0080
- 298              	.L17:
- 299 0050 F8BA40D8 		.word	-666846472
- 300 0054 13A20C40 		.word	1074569747
- 301              		.cfi_endproc
- 302              	.LFE242:
- 304              		.global	__aeabi_f2d
- 305              		.global	__aeabi_ddiv
- 306              		.section	.text.AD9834_Set_Phase,"ax",%progbits
- 307              		.align	1
- 308              		.global	AD9834_Set_Phase
- 309              		.syntax unified
- 310              		.thumb
- 311              		.thumb_func
- 313              	AD9834_Set_Phase:
- 314              	.LVL36:
- 315              	.LFB243:
- 136:User_BSP/9834.c **** //============================================================// 
- 137:User_BSP/9834.c **** 
- 138:User_BSP/9834.c **** /*   ע��ʹ��ʱ�ȵ��ó�ʼ��������ʼ��IO���ã�Ȼ���
- 139:User_BSP/9834.c **** 
- 140:User_BSP/9834.c **** ���Σ����ѡ��Ƶ��ֵ��������� */ 
-ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s 			page 9
+ 131:User_BSP/9834.c **** }
+ 492              		.loc 1 131 1 is_stmt 0 discriminator 4 view .LVU112
+ 493 005e 08BD     		pop	{r3, pc}
+ 494              	.LVL46:
+ 495              	.L46:
+ 127:User_BSP/9834.c ****     phase_word = (phase_number == PHASE_1) ? (uint16_t)(0xE000U | phase_value)
+ 496              		.loc 1 127 16 discriminator 1 view .LVU113
+ 497 0060 43F46040 		orr	r0, r3, #57344
+ 498              	.LVL47:
+ 127:User_BSP/9834.c ****     phase_word = (phase_number == PHASE_1) ? (uint16_t)(0xE000U | phase_value)
+ 499              		.loc 1 127 16 discriminator 1 view .LVU114
+ 500 0064 F9E7     		b	.L44
+ 501              	.L48:
+ 502 0066 00BF     		.align	2
+ 503              	.L47:
+ 504 0068 0000B443 		.word	1135869952
+ 505 006c 00008045 		.word	1166016512
+ 506              		.cfi_endproc
+ 507              	.LFE246:
+ 509              		.section	.text.AD9834_Init,"ax",%progbits
+ 510              		.align	1
+ 511              		.global	AD9834_Init
+ 512              		.syntax unified
+ 513              		.thumb
+ 514              		.thumb_func
+ 516              	AD9834_Init:
+ 517              	.LFB243:
+  50:User_BSP/9834.c ****     CS_1();
+ 518              		.loc 1 50 1 is_stmt 1 view -0
+ 519              		.cfi_startproc
+ 520              		@ args = 0, pretend = 0, frame = 0
+ 521              		@ frame_needed = 0, uses_anonymous_args = 0
+ 522 0000 10B5     		push	{r4, lr}
+ 523              	.LCFI5:
+ 524              		.cfi_def_cfa_offset 8
+ 525              		.cfi_offset 4, -8
+ 526              		.cfi_offset 14, -4
+ 527 0002 2DED028B 		vpush.64	{d8}
+ 528              	.LCFI6:
+ 529              		.cfi_def_cfa_offset 16
+ 530              		.cfi_offset 80, -16
+ 531              		.cfi_offset 81, -12
+  51:User_BSP/9834.c ****     AD9834_SCLK_SET();
+ 532              		.loc 1 51 5 view .LVU116
+ 533 0006 214C     		ldr	r4, .L51
+ 534 0008 0122     		movs	r2, #1
+ 535 000a 1021     		movs	r1, #16
+ 536 000c 2046     		mov	r0, r4
+ 537 000e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 538              	.LVL48:
+  52:User_BSP/9834.c ****     AD9834_SDATA_CLR();
+ 539              		.loc 1 52 5 view .LVU117
+ 540 0012 0122     		movs	r2, #1
+ 541 0014 2021     		movs	r1, #32
+ 542 0016 2046     		mov	r0, r4
+ 543 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 544              	.LVL49:
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 13
 
 
- 141:User_BSP/9834.c **** 
- 142:User_BSP/9834.c **** /**************************************************************** 
- 143:User_BSP/9834.c **** ��������: AD9834_Set_Phase
- 144:User_BSP/9834.c **** ��    ��: ������λֵ
- 145:User_BSP/9834.c **** ��    ��: phase_number -- Ҫд�����λ�Ĵ��� (PHASE_0 �� PHASE_1)
- 146:User_BSP/9834.c ****           phase_in_degrees -- ��λֵ (0.0 �� 360.0 ��)
- 147:User_BSP/9834.c **** ����ֵ  : ��
- 148:User_BSP/9834.c **** *****************************************************************/
- 149:User_BSP/9834.c **** void AD9834_Set_Phase(unsigned char phase_number, float phase_in_degrees)
- 150:User_BSP/9834.c **** {
- 316              		.loc 1 150 1 is_stmt 1 view -0
- 317              		.cfi_startproc
- 318              		@ args = 0, pretend = 0, frame = 0
- 319              		@ frame_needed = 0, uses_anonymous_args = 0
- 320              		.loc 1 150 1 is_stmt 0 view .LVU58
- 321 0000 10B5     		push	{r4, lr}
- 322              	.LCFI6:
- 323              		.cfi_def_cfa_offset 8
- 324              		.cfi_offset 4, -8
- 325              		.cfi_offset 14, -4
- 326 0002 0446     		mov	r4, r0
- 151:User_BSP/9834.c ****     unsigned int phase_word = 0;
- 327              		.loc 1 151 5 is_stmt 1 view .LVU59
- 328              	.LVL37:
- 152:User_BSP/9834.c ****     unsigned int phase_val = 0;
- 329              		.loc 1 152 5 view .LVU60
- 153:User_BSP/9834.c **** 
- 154:User_BSP/9834.c ****     // 1. ���ݹ�ʽ����12λ����λֵ
- 155:User_BSP/9834.c ****     if (phase_in_degrees < 0.0) phase_in_degrees = 0.0;
- 330              		.loc 1 155 5 view .LVU61
- 331              		.loc 1 155 8 is_stmt 0 view .LVU62
- 332 0004 B5EEC00A 		vcmpe.f32	s0, #0
- 333 0008 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 334 000c 21D4     		bmi	.L29
- 335              	.LVL38:
- 336              	.L20:
- 156:User_BSP/9834.c ****     if (phase_in_degrees > 360.0) phase_in_degrees = 360.0;
- 337              		.loc 1 156 5 is_stmt 1 view .LVU63
- 338              		.loc 1 156 8 is_stmt 0 view .LVU64
- 339 000e DFED147A 		vldr.32	s15, .L30
- 340 0012 B4EEE70A 		vcmpe.f32	s0, s15
- 341 0016 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 342 001a 01DD     		ble	.L21
- 343              		.loc 1 156 52 view .LVU65
- 344 001c B0EE670A 		vmov.f32	s0, s15
- 345              	.LVL39:
- 346              	.L21:
- 157:User_BSP/9834.c ****     phase_val = (unsigned int)((phase_in_degrees / 360.0) * 4096.0);
- 347              		.loc 1 157 5 is_stmt 1 view .LVU66
- 348              		.loc 1 157 50 is_stmt 0 view .LVU67
- 349 0020 10EE100A 		vmov	r0, s0
- 350              	.LVL40:
- 351              		.loc 1 157 50 view .LVU68
- 352 0024 FFF7FEFF 		bl	__aeabi_f2d
- 353              	.LVL41:
- 354              		.loc 1 157 50 view .LVU69
- 355 0028 0022     		movs	r2, #0
-ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s 			page 10
+  53:User_BSP/9834.c **** 
+ 545              		.loc 1 53 5 view .LVU118
+ 546 001c 0022     		movs	r2, #0
+ 547 001e 8021     		movs	r1, #128
+ 548 0020 2046     		mov	r0, r4
+ 549 0022 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 550              	.LVL50:
+  55:User_BSP/9834.c ****     AD9834_PS_CLR();
+ 551              		.loc 1 55 5 view .LVU119
+ 552 0026 0022     		movs	r2, #0
+ 553 0028 4FF48071 		mov	r1, #256
+ 554 002c 2046     		mov	r0, r4
+ 555 002e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 556              	.LVL51:
+  56:User_BSP/9834.c ****     RESET_0();
+ 557              		.loc 1 56 5 view .LVU120
+ 558 0032 0022     		movs	r2, #0
+ 559 0034 0221     		movs	r1, #2
+ 560 0036 1648     		ldr	r0, .L51+4
+ 561 0038 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 562              	.LVL52:
+  57:User_BSP/9834.c **** 
+ 563              		.loc 1 57 5 view .LVU121
+ 564 003c 0022     		movs	r2, #0
+ 565 003e 4021     		movs	r1, #64
+ 566 0040 2046     		mov	r0, r4
+ 567 0042 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 568              	.LVL53:
+  59:User_BSP/9834.c ****     AD9834_Write_ControlRegister();
+ 569              		.loc 1 59 5 view .LVU122
+  59:User_BSP/9834.c ****     AD9834_Write_ControlRegister();
+ 570              		.loc 1 59 25 is_stmt 0 view .LVU123
+ 571 0046 134C     		ldr	r4, .L51+8
+ 572 0048 4FF40453 		mov	r3, #8448
+ 573 004c 2380     		strh	r3, [r4]	@ movhi
+  60:User_BSP/9834.c **** 
+ 574              		.loc 1 60 5 is_stmt 1 view .LVU124
+ 575 004e FFF7FEFF 		bl	AD9834_Write_ControlRegister
+ 576              	.LVL54:
+  62:User_BSP/9834.c ****     AD9834_Set_Freq(FREQ_1, 0U);
+ 577              		.loc 1 62 5 view .LVU125
+ 578 0052 0021     		movs	r1, #0
+ 579 0054 0846     		mov	r0, r1
+ 580 0056 FFF7FEFF 		bl	AD9834_Set_Freq
+ 581              	.LVL55:
+  63:User_BSP/9834.c ****     AD9834_Set_Phase(PHASE_0, 0.0f);
+ 582              		.loc 1 63 5 view .LVU126
+ 583 005a 0021     		movs	r1, #0
+ 584 005c 0120     		movs	r0, #1
+ 585 005e FFF7FEFF 		bl	AD9834_Set_Freq
+ 586              	.LVL56:
+  64:User_BSP/9834.c ****     AD9834_Set_Phase(PHASE_1, 0.0f);
+ 587              		.loc 1 64 5 view .LVU127
+ 588 0062 9FED0D8A 		vldr.32	s16, .L51+12
+ 589 0066 B0EE480A 		vmov.f32	s0, s16
+ 590 006a 0020     		movs	r0, #0
+ 591 006c FFF7FEFF 		bl	AD9834_Set_Phase
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 14
 
 
- 356 002a 0E4B     		ldr	r3, .L30+4
- 357 002c FFF7FEFF 		bl	__aeabi_ddiv
- 358              	.LVL42:
- 359              		.loc 1 157 59 view .LVU70
- 360 0030 0022     		movs	r2, #0
- 361 0032 0D4B     		ldr	r3, .L30+8
- 362 0034 FFF7FEFF 		bl	__aeabi_dmul
- 363              	.LVL43:
- 364              		.loc 1 157 15 view .LVU71
- 365 0038 FFF7FEFF 		bl	__aeabi_d2uiz
- 366              	.LVL44:
- 158:User_BSP/9834.c ****     
- 159:User_BSP/9834.c ****     // 2. �����λֵ�Ƿ���12λ��Χ�� (0-4095)
- 160:User_BSP/9834.c ****     if (phase_val > 4095)
- 367              		.loc 1 160 5 is_stmt 1 view .LVU72
- 368              		.loc 1 160 8 is_stmt 0 view .LVU73
- 369 003c B0F5805F 		cmp	r0, #4096
- 370 0040 01D3     		bcc	.L22
- 161:User_BSP/9834.c ****     {
- 162:User_BSP/9834.c ****         phase_val = 4095;
- 371              		.loc 1 162 19 view .LVU74
- 372 0042 40F6FF70 		movw	r0, #4095
- 373              	.LVL45:
- 374              	.L22:
- 163:User_BSP/9834.c ****     }
- 164:User_BSP/9834.c **** 
- 165:User_BSP/9834.c ****     // 3. ����ѡ��ļĴ�������ϵ�ַ�����λֵ
- 166:User_BSP/9834.c ****     if (phase_number == PHASE_0)
- 375              		.loc 1 166 5 is_stmt 1 view .LVU75
- 376              		.loc 1 166 8 is_stmt 0 view .LVU76
- 377 0046 3CB9     		cbnz	r4, .L23
- 167:User_BSP/9834.c ****     {
- 168:User_BSP/9834.c ****         // PHASE0 ��ַ���� 0xC000
- 169:User_BSP/9834.c ****         phase_word = 0xC000 | phase_val;
- 378              		.loc 1 169 9 is_stmt 1 view .LVU77
- 379              		.loc 1 169 20 is_stmt 0 view .LVU78
- 380 0048 40F44040 		orr	r0, r0, #49152
- 381              	.LVL46:
- 382              	.L24:
- 170:User_BSP/9834.c ****     }
- 171:User_BSP/9834.c ****     else // phase_number == PHASE_1
- 172:User_BSP/9834.c ****     {
- 173:User_BSP/9834.c ****         // PHASE1 ��ַ���� 0xE000
- 174:User_BSP/9834.c ****         phase_word = 0xE000 | phase_val;
- 175:User_BSP/9834.c ****     }
- 176:User_BSP/9834.c **** 
- 177:User_BSP/9834.c ****     // 4. ͨ��SPIд�����յ�16λ����
- 178:User_BSP/9834.c ****     AD9834_Write_16Bits(phase_word);
- 383              		.loc 1 178 5 is_stmt 1 view .LVU79
- 384 004c FFF7FEFF 		bl	AD9834_Write_16Bits
- 385              	.LVL47:
- 179:User_BSP/9834.c **** }
- 386              		.loc 1 179 1 is_stmt 0 view .LVU80
- 387 0050 10BD     		pop	{r4, pc}
- 388              	.LVL48:
- 389              	.L29:
- 155:User_BSP/9834.c ****     if (phase_in_degrees > 360.0) phase_in_degrees = 360.0;
-ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s 			page 11
-
-
- 390              		.loc 1 155 50 view .LVU81
- 391 0052 9FED060A 		vldr.32	s0, .L30+12
- 392              	.LVL49:
- 155:User_BSP/9834.c ****     if (phase_in_degrees > 360.0) phase_in_degrees = 360.0;
- 393              		.loc 1 155 50 view .LVU82
- 394 0056 DAE7     		b	.L20
- 395              	.LVL50:
- 396              	.L23:
- 174:User_BSP/9834.c ****     }
- 397              		.loc 1 174 9 is_stmt 1 view .LVU83
- 174:User_BSP/9834.c ****     }
- 398              		.loc 1 174 20 is_stmt 0 view .LVU84
- 399 0058 40F46040 		orr	r0, r0, #57344
- 400              	.LVL51:
- 174:User_BSP/9834.c ****     }
- 401              		.loc 1 174 20 view .LVU85
- 402 005c F6E7     		b	.L24
- 403              	.L31:
- 404 005e 00BF     		.align	2
- 405              	.L30:
- 406 0060 0000B443 		.word	1135869952
- 407 0064 00807640 		.word	1081507840
- 408 0068 0000B040 		.word	1085276160
- 409 006c 00000000 		.word	0
- 410              		.cfi_endproc
- 411              	.LFE243:
- 413              		.text
- 414              	.Letext0:
- 415              		.file 2 "d:\\app\\clion-dependency\\gcc-arm\\arm-none-eabi\\include\\machine\\_default_types.h"
- 416              		.file 3 "d:\\app\\clion-dependency\\gcc-arm\\arm-none-eabi\\include\\sys\\_stdint.h"
- 417              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f405xx.h"
- 418              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
- 419              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
- 420              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
- 421              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h"
-ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s 			page 12
+ 592              	.LVL57:
+  65:User_BSP/9834.c **** 
+ 593              		.loc 1 65 5 view .LVU128
+ 594 0070 B0EE480A 		vmov.f32	s0, s16
+ 595 0074 0120     		movs	r0, #1
+ 596 0076 FFF7FEFF 		bl	AD9834_Set_Phase
+ 597              	.LVL58:
+  67:User_BSP/9834.c ****     AD9834_Write_ControlRegister();
+ 598              		.loc 1 67 5 view .LVU129
+  67:User_BSP/9834.c ****     AD9834_Write_ControlRegister();
+ 599              		.loc 1 67 25 is_stmt 0 view .LVU130
+ 600 007a 4FF40053 		mov	r3, #8192
+ 601 007e 2380     		strh	r3, [r4]	@ movhi
+  68:User_BSP/9834.c **** }
+ 602              		.loc 1 68 5 is_stmt 1 view .LVU131
+ 603 0080 FFF7FEFF 		bl	AD9834_Write_ControlRegister
+ 604              	.LVL59:
+  69:User_BSP/9834.c **** 
+ 605              		.loc 1 69 1 is_stmt 0 view .LVU132
+ 606 0084 BDEC028B 		vldm	sp!, {d8}
+ 607              	.LCFI7:
+ 608              		.cfi_restore 80
+ 609              		.cfi_restore 81
+ 610              		.cfi_def_cfa_offset 8
+ 611 0088 10BD     		pop	{r4, pc}
+ 612              	.L52:
+ 613 008a 00BF     		.align	2
+ 614              	.L51:
+ 615 008c 00000240 		.word	1073872896
+ 616 0090 00080240 		.word	1073874944
+ 617 0094 00000000 		.word	.LANCHOR0
+ 618 0098 00000000 		.word	0
+ 619              		.cfi_endproc
+ 620              	.LFE243:
+ 622              		.section	.data.ad9834_control_word,"aw"
+ 623              		.align	1
+ 624              		.set	.LANCHOR0,. + 0
+ 627              	ad9834_control_word:
+ 628 0000 0020     		.short	8192
+ 629              		.section	.data.ad9834_mclk_hz,"aw"
+ 630              		.align	2
+ 631              		.set	.LANCHOR1,. + 0
+ 634              	ad9834_mclk_hz:
+ 635 0000 C0687804 		.word	75000000
+ 636              		.text
+ 637              	.Letext0:
+ 638              		.file 2 "d:\\app\\clion-dependency\\gcc-arm\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 639              		.file 3 "d:\\app\\clion-dependency\\gcc-arm\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 640              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f405xx.h"
+ 641              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ARM GAS  C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s 			page 15
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 9834.c
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:20     .text.AD9834_Write_16Bits:00000000 $t
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:26     .text.AD9834_Write_16Bits:00000000 AD9834_Write_16Bits
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:75     .text.AD9834_Write_16Bits:00000030 $d
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:81     .text.AD9834_Select_Wave:00000000 $t
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:87     .text.AD9834_Select_Wave:00000000 AD9834_Select_Wave
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:141    .text.AD9834_Select_Wave:00000038 $d
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:146    .text.AD9834_Init:00000000 $t
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:152    .text.AD9834_Init:00000000 AD9834_Init
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:196    .text.AD9834_Init:0000003c $d
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:205    .text.AD9834_Set_Freq:00000000 $t
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:211    .text.AD9834_Set_Freq:00000000 AD9834_Set_Freq
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:299    .text.AD9834_Set_Freq:00000050 $d
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:307    .text.AD9834_Set_Phase:00000000 $t
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:313    .text.AD9834_Set_Phase:00000000 AD9834_Set_Phase
-C:\Users\bubble\AppData\Local\Temp\ccL63IeM.s:406    .text.AD9834_Set_Phase:00000060 $d
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:20     .text.AD9834_Write_16Bits:00000000 $t
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:26     .text.AD9834_Write_16Bits:00000000 AD9834_Write_16Bits
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:148    .text.AD9834_Write_16Bits:00000078 $d
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:153    .text.AD9834_Write_ControlRegister:00000000 $t
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:158    .text.AD9834_Write_ControlRegister:00000000 AD9834_Write_ControlRegister
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:179    .text.AD9834_Write_ControlRegister:0000000c $d
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:184    .text.AD9834_Set_MclkHz:00000000 $t
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:190    .text.AD9834_Set_MclkHz:00000000 AD9834_Set_MclkHz
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:211    .text.AD9834_Set_MclkHz:00000008 $d
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:216    .text.AD9834_Get_MclkHz:00000000 $t
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:222    .text.AD9834_Get_MclkHz:00000000 AD9834_Get_MclkHz
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:237    .text.AD9834_Get_MclkHz:00000008 $d
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:242    .text.AD9834_Select_Wave:00000000 $t
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:248    .text.AD9834_Select_Wave:00000000 AD9834_Select_Wave
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:286    .text.AD9834_Select_Wave:00000020 $d
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:292    .text.AD9834_Set_Freq:00000000 $t
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:298    .text.AD9834_Set_Freq:00000000 AD9834_Set_Freq
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:409    .text.AD9834_Set_Freq:0000006c $d
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:415    .text.AD9834_Set_Phase:00000000 $t
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:421    .text.AD9834_Set_Phase:00000000 AD9834_Set_Phase
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:504    .text.AD9834_Set_Phase:00000068 $d
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:510    .text.AD9834_Init:00000000 $t
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:516    .text.AD9834_Init:00000000 AD9834_Init
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:615    .text.AD9834_Init:0000008c $d
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:623    .data.ad9834_control_word:00000000 $d
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:627    .data.ad9834_control_word:00000000 ad9834_control_word
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:630    .data.ad9834_mclk_hz:00000000 $d
+C:\Users\bubble\AppData\Local\Temp\ccPR0omB.s:634    .data.ad9834_mclk_hz:00000000 ad9834_mclk_hz
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin
-HAL_SPI_Transmit
-hspi1
-__aeabi_ui2d
-__aeabi_dmul
-__aeabi_d2uiz
-__aeabi_f2d
-__aeabi_ddiv
+__aeabi_uldivmod

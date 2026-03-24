@@ -1,92 +1,54 @@
-#ifndef __9834_H_
-#define __9834_H_
+#ifndef __AD9834_H__
+#define __AD9834_H__
+
+#include <stdint.h>
 
 #include "main.h"
 
-//TRIANGLE_WAVE,SINE_WAVE,SQUARE_WAVEĬ��"λ"����
+#define AD9834_DEFAULT_MCLK_HZ 75000000UL
 
-#define TRIANGLE_WAVE 	0x2002 //���ǲ�
-#define SINE_WAVE 			0x2008 // ���Ҳ�
-#define SQUARE_WAVE 		0x2028 // ����
-#define PIN_SW    			0x200
+#define AD9834_CTRL_B28       (1U << 13)
+#define AD9834_CTRL_HLB       (1U << 12)
+#define AD9834_CTRL_FSEL      (1U << 11)
+#define AD9834_CTRL_PSEL      (1U << 10)
+#define AD9834_CTRL_PIN_SW    (1U << 9)
+#define AD9834_CTRL_RESET     (1U << 8)
+#define AD9834_CTRL_SLEEP1    (1U << 7)
+#define AD9834_CTRL_SLEEP12   (1U << 6)
+#define AD9834_CTRL_OPBITEN   (1U << 5)
+#define AD9834_CTRL_SIGN_PIB  (1U << 4)
+#define AD9834_CTRL_DIV2      (1U << 3)
+#define AD9834_CTRL_MODE      (1U << 1)
 
-/*AD9834����Ƶ��75MHZ*/
-#define AD9834_SYSTEM_COLCK	75000000UL
+#define SINE_WAVE      (AD9834_CTRL_B28)
+#define TRIANGLE_WAVE  (AD9834_CTRL_B28 | AD9834_CTRL_MODE)
+#define SQUARE_WAVE    (AD9834_CTRL_B28 | AD9834_CTRL_OPBITEN | AD9834_CTRL_DIV2)
 
-/* AD9834�������� */
+#define FREQ_0   0U
+#define FREQ_1   1U
+#define PHASE_0  0U
+#define PHASE_1  1U
 
-#define CS_0()  HAL_GPIO_WritePin(FSYNC_GPIO_Port,FSYNC_Pin,GPIO_PIN_RESET)
-#define	CS_1()  HAL_GPIO_WritePin(FSYNC_GPIO_Port,FSYNC_Pin,GPIO_PIN_SET)
+#define CS_0()    HAL_GPIO_WritePin(FSYNC_GPIO_Port, FSYNC_Pin, GPIO_PIN_RESET)
+#define CS_1()    HAL_GPIO_WritePin(FSYNC_GPIO_Port, FSYNC_Pin, GPIO_PIN_SET)
+#define RESET_0() HAL_GPIO_WritePin(RESET_GPIO_Port, RESET_Pin, GPIO_PIN_RESET)
+#define RESET_1() HAL_GPIO_WritePin(RESET_GPIO_Port, RESET_Pin, GPIO_PIN_SET)
 
-#define RESET_0()  HAL_GPIO_WritePin(RESET_GPIO_Port,RESET_Pin,GPIO_PIN_RESET)
-#define	RESET_1()  HAL_GPIO_WritePin(RESET_GPIO_Port,RESET_Pin,GPIO_PIN_SET)
+#define AD9834_PS_SET() HAL_GPIO_WritePin(PS_GPIO_Port, PS_Pin, GPIO_PIN_SET)
+#define AD9834_PS_CLR() HAL_GPIO_WritePin(PS_GPIO_Port, PS_Pin, GPIO_PIN_RESET)
+#define AD9834_FS_SET() HAL_GPIO_WritePin(FS_GPIO_Port, FS_Pin, GPIO_PIN_SET)
+#define AD9834_FS_CLR() HAL_GPIO_WritePin(FS_GPIO_Port, FS_Pin, GPIO_PIN_RESET)
+#define AD9834_SCLK_SET() HAL_GPIO_WritePin(SCLK_GPIO_Port, SCLK_Pin, GPIO_PIN_SET)
+#define AD9834_SCLK_CLR() HAL_GPIO_WritePin(SCLK_GPIO_Port, SCLK_Pin, GPIO_PIN_RESET)
+#define AD9834_SDATA_SET() HAL_GPIO_WritePin(SDATA_GPIO_Port, SDATA_Pin, GPIO_PIN_SET)
+#define AD9834_SDATA_CLR() HAL_GPIO_WritePin(SDATA_GPIO_Port, SDATA_Pin, GPIO_PIN_RESET)
 
-//===================��λ����=======================
-#define AD9834_PS_SET HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_SET)
-#define AD9834_PS_CLR HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_RESET)
-
-//===================Ƶ�ʿ���=======================
-#define AD9834_FS_SET HAL_GPIO_WritePin(GPIOA,GPIO_PIN_8,GPIO_PIN_SET)
-#define AD9834_FS_CLR HAL_GPIO_WritePin(GPIOA,GPIO_PIN_8,GPIO_PIN_RESET)
-
-
-
-
-
-#define FREQ_0      0 
-
-#define FREQ_1      1 
-
-#define PHASE_0     0
-
-#define PHASE_1     1
-
- 
-
-#define DB15        0 
-
-#define DB14        0 
-
-#define DB13        B28 
-
-#define DB12        HLB 
-
-#define DB11        FSEL 
-
-#define DB10        PSEL 
-
-#define DB9         PIN_SW 
-
-#define DB8         RESET 
-
-#define DB7         SLEEP1 
-
-#define DB6         SLEEP12 
-
-#define DB5         OPBITEN 
-
-#define DB4         SIGN_PIB 
-
-#define DB3         DIV2 
-
-#define DB2         0 
-
-#define DB1         MODE 
-
-#define DB0         0 
-
-#define CONTROL_REGISTER    (DB15<<15)|(DB14<<14)|(DB13<<13)|(DB12<<12)|(DB11<<11)|(DB10<<10)|(DB9<<9)|(DB8<<8)|(DB7<<7)|(DB6<<6)|(DB5<<5)|(DB4<<4)|(DB3<<3)|(DB2<<2)|(DB1<<1)|(DB0<<0) 
-
-/* AD9834�������� */ 
-
- void AD9834_Write_16Bits(unsigned int data) ;  //дһ���ֵ�AD9834 
-
- void AD9834_Select_Wave(unsigned int initdata) ; //ѡ��������� 
-
-void AD9834_Init(void);  					//��ʼ������ 
-
- void AD9834_Set_Freq(unsigned char freq_number, unsigned long freq) ;//ѡ������Ĵ��������Ƶ��ֵ 
- 
- void AD9834_Set_Phase(unsigned char phase_number, float phase_in_degrees);//ѡ����λ�Ĵ����������λֵ 
+void AD9834_Write_16Bits(uint16_t data);
+void AD9834_Select_Wave(uint16_t waveform);
+void AD9834_Init(void);
+void AD9834_Set_Freq(uint8_t freq_number, uint32_t freq_hz);
+void AD9834_Set_Phase(uint8_t phase_number, float phase_in_degrees);
+void AD9834_Set_MclkHz(uint32_t mclk_hz);
+uint32_t AD9834_Get_MclkHz(void);
 
 #endif

@@ -56,8 +56,9 @@ void MX_GPIO_Init(void)
                           |S1_IO_53_Pin|S0_IO_53_Pin|IO2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, IR_S0_Pin|IR_S1_Pin|FSYNC_Pin|RESET_Pin
-                          |FS_Pin|VR_S1_Pin|VR_S0_Pin|EN__5V_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, IR_S0_Pin|IR_S1_Pin|FSYNC_Pin|SCLK_Pin
+                          |RESET_Pin|SDATA_Pin|FS_Pin|VR_S1_Pin|VR_S0_Pin
+                          |EN__5V_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, LED1_Pin|LED2_Pin|LED3_Pin|S0_FIL_52_Pin
@@ -88,10 +89,12 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(PS_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : IR_S0_Pin IR_S1_Pin FSYNC_Pin RESET_Pin
-                           FS_Pin VR_S1_Pin VR_S0_Pin EN__5V_Pin */
-  GPIO_InitStruct.Pin = IR_S0_Pin|IR_S1_Pin|FSYNC_Pin|RESET_Pin
-                          |FS_Pin|VR_S1_Pin|VR_S0_Pin|EN__5V_Pin;
+  /*Configure GPIO pins : IR_S0_Pin IR_S1_Pin FSYNC_Pin SCLK_Pin
+                           RESET_Pin SDATA_Pin FS_Pin VR_S1_Pin VR_S0_Pin
+                           EN__5V_Pin */
+  GPIO_InitStruct.Pin = IR_S0_Pin|IR_S1_Pin|FSYNC_Pin|SCLK_Pin
+                          |RESET_Pin|SDATA_Pin|FS_Pin|VR_S1_Pin|VR_S0_Pin
+                          |EN__5V_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
